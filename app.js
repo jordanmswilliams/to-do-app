@@ -1,28 +1,42 @@
 function onReady() {
-    const addToDoForm = document.getElementById('addToDoForm');
-    const newToDoText = document.getElementById('newToDoText');
-    const toDoList = document.getElementById('toDoList');
 
-      addToDoForm.addEventListener('submit', () => {
+  const addToDoForm = document.getElementById('addToDoForm');
+  const newToDoText = document.getElementById('newToDoText');
+  const toDoList = document.getElementById('toDoList');
+  const removeTask = document.createElement('input');
+
+  addToDoForm.addEventListener('submit', () => {
         event.preventDefault();
 
-        // get the text
+        // Get to-do input value
         let title = newToDoText.value;
 
-        // create a new li
+        // Create a new line-item
         let newLi = document.createElement('li');
 
-        // create a new input
+        // Create a new input
         let checkbox = document.createElement('input');
 
-        // set the input's type to checkbox
+        let deleteButton = document.createElement('button')
+
+        // Set the input's type to checkbox
         checkbox.type = "checkbox";
 
-        // set the title
+        // Add to-do value to new line-item
         newLi.textContent = title;
 
-        // attach the checkbox to the li
+        // Append the checkbox to the line-item
         newLi.appendChild(checkbox);
+
+
+        // Add a 'remove' button to the line-item
+        removeTask.setAttribute('type', 'button');
+        removeTask.setAttribute("value", "Remove");
+        removeTask.setAttribute("id", "removeButton");
+        removeTask.addEventListener('click', function(e) {
+          newLi.parentNode.removeChild(newLi);
+            }, false);
+        newLi.appendChild(removeTask);
 
         // attach the li to the ul
         toDoList.appendChild(newLi);
@@ -31,6 +45,8 @@ function onReady() {
         newToDoText.value = '';
   });
  }
+
+// Execute function onReady when page is loaded
 window.onload = function() {
    onReady();
  };
