@@ -1,52 +1,42 @@
-function onReady() {
+function onReady(){
+ // let toDos = [];
+ // let toDoId = 1;
+  const ADD_TODO_FORM = document.getElementById('addToDoForm');
+  const NEW_TODO_TEXT = document.getElementById('newToDoText');
+  const TODO_LIST = document.getElementById('toDoList');
 
-  const addToDoForm = document.getElementById('addToDoForm');
-  const newToDoText = document.getElementById('newToDoText');
-  const toDoList = document.getElementById('toDoList');
-  const removeTask = document.createElement('input');
+  ADD_TODO_FORM.addEventListener('submit', (event) => {
+    event.preventDefault();
 
-  addToDoForm.addEventListener('submit', () => {
-        event.preventDefault();
+    let title = NEW_TODO_TEXT.value;
 
-        // Get to-do input value
-        let title = newToDoText.value;
+    let newLi = document.createElement('li');
 
-        // Create a new line-item
-        let newLi = document.createElement('li');
-
-        // Create a new input
-        let checkbox = document.createElement('input');
-
-        let deleteButton = document.createElement('button')
-
-        // Set the input's type to checkbox
-        checkbox.type = "checkbox";
-
-        // Add to-do value to new line-item
-        newLi.textContent = title;
-
-        // Append the checkbox to the line-item
-        newLi.appendChild(checkbox);
+    let checkbox = document.createElement('input');
+    checkbox.type = "checkbox";
 
 
-        // Add a 'remove' button to the line-item
-        removeTask.setAttribute('type', 'button');
-        removeTask.setAttribute("value", "Remove");
-        removeTask.setAttribute("id", "removeButton");
-        removeTask.addEventListener('click', function(e) {
-          newLi.parentNode.removeChild(newLi);
-            }, false);
-        newLi.appendChild(removeTask);
+    let deleteBtn = document.createElement('button');
+    deleteBtn.textContent = "Delete";
+  deleteBtn.className = 'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent';
+  componentHandler.upgradeElement(deleteBtn);
+  document.getElementById('container').appendChild(deleteBtn);
 
-        // attach the li to the ul
-        toDoList.appendChild(newLi);
 
-        //empty the input
-        newToDoText.value = '';
+    deleteBtn.addEventListener('click', function(event){
+      let buttonLiText = this.parentElement.childNodes[0].textContent;
+      TODO_LIST.removeChild(this.parentElement);
+    })
+
+    newLi.textContent = title;
+    newLi.appendChild(checkbox);
+    newLi.appendChild(deleteBtn);
+
+    TODO_LIST.appendChild(newLi);
+    NEW_TODO_TEXT.value = "";
   });
- }
+};
 
-// Execute function onReady when page is loaded
 window.onload = function() {
-   onReady();
- };
+  onReady();
+};
