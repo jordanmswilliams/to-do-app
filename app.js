@@ -20,7 +20,7 @@ function onReady(){
     deleteBtn.textContent = "Delete";
   deleteBtn.className = 'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent';
   componentHandler.upgradeElement(deleteBtn);
-  document.getElementById('container').appendChild(deleteBtn);
+  
 
 
     deleteBtn.addEventListener('click', function(event){
