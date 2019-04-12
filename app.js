@@ -1,3 +1,5 @@
+/* checkpoint work */
+
 function onReady() {
   const toDos = [];
   const addToDoForm = document.getElementById('addToDoForm');
@@ -10,7 +12,7 @@ function onReady() {
       title: newToDoText.value,
       complete: false
     });
-    
+
     newToDoText.value = '';
 
     renderTheUI();
